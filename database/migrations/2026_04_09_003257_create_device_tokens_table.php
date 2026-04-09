@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('id_usuario');
             $table->text('token');
             $table->enum('platform', ['ios', 'android'])->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(true)->nullable();
             
             $table->timestamps();
 

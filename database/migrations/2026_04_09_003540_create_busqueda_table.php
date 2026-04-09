@@ -15,12 +15,13 @@ return new class extends Migration
             $table->uuid('id_busqueda')->primary()->default(DB::raw('gen_random_uuid()'));
             $table->uuid('id_usuario');
             $table->string('termino_busqueda');
-            
+            $table->geometry('geom', 'geometry', 4326)->nullable();
+
             $table->timestamps();
             $table->foreign('id_usuario')->references('id_usuario')->on('usuario');
         });
 
-        DB::statement('ALTER TABLE busqueda ADD COLUMN geom geometry(Point, 4326);');
+        //DB::statement('ALTER TABLE busqueda ADD COLUMN geom geometry(Point, 4326);');
         DB::statement('CREATE INDEX idx_busqueda_geom ON busqueda USING GIST (geom);');
 
     }

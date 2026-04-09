@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('apellido', 50)->nullable();
             $table->string('correo', 150)->nullable();
             $table->text('password')->nullable();
+            $table->enum('rol', ['admin', 'usuario', 'autoridad'])->nullable();
             $table->boolean('estado')->nullable();
             $table->timestamps();
 

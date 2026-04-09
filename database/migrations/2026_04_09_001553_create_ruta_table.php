@@ -16,14 +16,16 @@ return new class extends Migration
             $table->uuid('id_ruta')->primary()->default(DB::raw('gen_random_uuid()'));
             $table->uuid('id_usuario');
             $table->string('nombre', 100)->nullable();
+            $table->geometry('ruta', 'linestring', 4326)->nullable();
+            $table->boolean('activa')->default(true)->nullable();
 
             $table->timestamps();
 
             $table->foreign('id_usuario')->references('id_usuario')->on('usuario');
         });
 
-        DB::statement('ALTER TABLE ruta ADD COLUMN geom extensions.geometry(LineString, 4326);');
-        DB::statement('CREATE INDEX idx_ruta_geom ON ruta USING GIST (geom);');
+        //DB::statement('ALTER TABLE ruta ADD COLUMN geom extensions.geometry(LineString, 4326);');
+        DB::statement('CREATE INDEX idx_ruta_geom ON ruta USING GIST (ruta);');
     }
 
     /**
