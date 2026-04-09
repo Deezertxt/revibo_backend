@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('fecha_envio')->nullable();
 
             $table->timestamps();
+            $table->foreign('id_tipo_notificacion')->references('id_tipo_notificacion')->on('tipo_notificacion')->onDelete('cascade');
         });
     }
 

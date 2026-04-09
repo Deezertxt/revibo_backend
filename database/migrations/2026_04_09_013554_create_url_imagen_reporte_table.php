@@ -16,6 +16,8 @@ return new class extends Migration
             $table->uuid('id_reporte');
             $table->text('url_imagen')->nullable();
             $table->timestamps();
+
+            $table->foreign('id_reporte')->references('id_reporte')->on('reporte')->onDelete('cascade');
         });
     }
 
