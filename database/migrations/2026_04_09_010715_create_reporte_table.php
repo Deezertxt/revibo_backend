@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreign('id_gravedad_reporte')->references('id_gravedad_reporte')->on('gravedad_reporte');
         });
 
-        DB::statement('ALTER TABLE reporte ADD COLUMN geom geometry(Point, 4326);');
+        DB::statement('ALTER TABLE reporte ADD COLUMN geom extensions.geometry(Point, 4326);');
         DB::statement('CREATE INDEX idx_reporte_geom ON reporte USING GIST (geom);');
     }
 

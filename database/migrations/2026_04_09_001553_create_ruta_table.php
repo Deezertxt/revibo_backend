@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('CREATE EXTENSION IF NOT EXISTS "postgis";');
+        DB::statement('CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA "extensions";');
         Schema::create('ruta', function (Blueprint $table) {
             $table->uuid('id_ruta')->primary()->default(DB::raw('gen_random_uuid()'));
             $table->uuid('id_usuario');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreign('id_usuario')->references('id_usuario')->on('usuario');
         });
 
-        DB::statement('ALTER TABLE ruta ADD COLUMN geom geometry(LineString, 4326);');
+        DB::statement('ALTER TABLE ruta ADD COLUMN geom extensions.geometry(LineString, 4326);');
         DB::statement('CREATE INDEX idx_ruta_geom ON ruta USING GIST (geom);');
     }
 
