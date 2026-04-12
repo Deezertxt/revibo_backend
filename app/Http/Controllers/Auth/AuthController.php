@@ -23,6 +23,7 @@ class AuthController extends Controller
             'confirmacion_contrasena' => 'required|string|same:contrasena',
         ]);
 
+        //dd($validatedData);
         // Crear el usuario
         $usuario = Usuario::create([
             'id_usuario' => Str::uuid(),
@@ -34,7 +35,6 @@ class AuthController extends Controller
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
         // Generar token de autenticación
         $token = $usuario->createToken('mobile_token')->plainTextToken;
 
@@ -49,7 +49,10 @@ class AuthController extends Controller
                 'message' => 'Error al registar usuario'
             ];
         }
-
         return response()->json($data, 201);
+    }
+
+    public function iniciarSesion(){
+
     }
 }
