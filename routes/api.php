@@ -17,9 +17,14 @@ Route::prefix('v1')->group(function() {
      * http://localhost:8000/api/v1/archivo/test
      * */ 
 
-
-
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/autenticar', fn() => response()->json([
+            'message' => 'Autenticado correctamente',
+            'user' => request()->user(),
+        ]));
+    });
 
 
     require __DIR__.'/Modules/archivoRuta.php';
+    require __DIR__.'/auth.php';
 });

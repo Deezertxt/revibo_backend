@@ -14,7 +14,7 @@ return new class extends Migration
         DB::statement('CREATE EXTENSION IF NOT EXISTS "pgcrypto";');
         Schema::create('usuario', function (Blueprint $table) {
             $table->uuid('id_usuario')->primary()->default(DB::raw('gen_random_uuid()'));
-            $table->uuid('id_institucion');
+            $table->uuid('id_institucion')->nullable();
             $table->string('nombre', 50)->nullable();
             $table->string('apellido', 50)->nullable();
             $table->string('correo', 150)->nullable();
