@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use App\Enums\RolUsuario;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens;
 
     protected $table = 'usuario';
     protected $primaryKey = 'id_usuario';
@@ -17,10 +20,9 @@ class Usuario extends Model
 
     protected $fillable = [
         'id_usuario',
-        'nombre_usuario',
-        'correo_usuario',
-        'contrasena_usuario',
-        'id_rol',
+        'nombre',
+        'correo',
+        'password',
         'id_institucion',
         'created_at',
         'updated_at',
@@ -29,7 +31,11 @@ class Usuario extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'rol' => RolUsuario::class,
     ];
+
+    protected $hidden = ['password'];
+
 
     public function institucion()
     {
