@@ -23,6 +23,8 @@ class Usuario extends Authenticatable
         'nombre',
         'correo',
         'password',
+        'rol',
+        'estado',
         'id_institucion',
         'created_at',
         'updated_at',
@@ -54,7 +56,7 @@ class Usuario extends Authenticatable
 
     public function device_tokens()
     {
-        return $this->hasMany(DeviceToken::class, 'id_usuario', 'id_usuario');
+        return $this->hasMany(DeviceTokens::class, 'id_usuario', 'id_usuario');
     }
 
     public function notificaciones()

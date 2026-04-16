@@ -17,8 +17,8 @@ class Institucion extends Model
 
     protected $fillable = [
         'id_institucion',
-        'nombre_institucion',
-        'descripcion_institucion',
+        'nombre',
+        'descripcion',
         'created_at',
         'updated_at',
     ];
