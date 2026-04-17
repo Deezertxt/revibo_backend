@@ -29,4 +29,5 @@ Route::prefix('v1')->group(function() {
     require __DIR__.'/auth.php';
     require __DIR__.'/Modules/autoridadRutas.php';
     require __DIR__.'/Modules/InstitucionRutas.php';
+    require __DIR__.'/Modules/reporteRutas.php';
 });

@@ -21,6 +21,7 @@ class Notificacion extends Model
         'titulo',
         'mensaje',
         'leida',
+        'tipo_notificacion',
         'created_at',
         'updated_at',
     ];
