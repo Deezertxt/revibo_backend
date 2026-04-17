@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\TipoNotificacionEnum;
 
 return new class extends Migration
 {
@@ -13,14 +14,15 @@ return new class extends Migration
     {
         Schema::create('notificacion', function (Blueprint $table) {
             $table->uuid('id_notificacion')->primary()->default(DB::raw('gen_random_uuid()'));
-            $table->uuid('id_tipo_notificacion');
+            //$table->uuid('id_tipo_notificacion');
             $table->string('titulo', 100);
             $table->text('mensaje')->nullable();
             $table->boolean('leida')->default(false);
+            $table->enum('tipo_notificacion', array_column(TipoNotificacionEnum::cases(),'value'))->default('');
             $table->timestamp('fecha_envio')->nullable();
 
             $table->timestamps();
-            $table->foreign('id_tipo_notificacion')->references('id_tipo_notificacion')->on('tipo_notificacion')->onDelete('cascade');
+            //$table->foreign('id_tipo_notificacion')->references('id_tipo_notificacion')->on('tipo_notificacion')->onDelete('cascade');
         });
     }
 
