@@ -9,7 +9,8 @@ class GetAutoridadesAction
 
     public function execute()
     {
-        return Usuario::with('institucion:id_institucion,nombre,descripcion')
+        return Usuario::where('rol', 'autoridad')
+                ->with('institucion:id_institucion,nombre,descripcion')
                 ->orderBy('created_at', 'desc')
                 ->get();
     }

@@ -14,7 +14,7 @@ Route::prefix('v1')->group(function() {
 
     /** 
      * Archivos de rutas de los módulos bajo versionamiento
-     * http://localhost:8000/api/v1/archivo/test
+     * http://localhost:8000/api/v1/test
      * */ 
 
     Route::middleware('auth:sanctum')->group(function () {
@@ -28,4 +28,5 @@ Route::prefix('v1')->group(function() {
     require __DIR__.'/Modules/archivoRuta.php';
     require __DIR__.'/auth.php';
     require __DIR__.'/Modules/autoridadRutas.php';
+    require __DIR__.'/Modules/InstitucionRutas.php';
 });
