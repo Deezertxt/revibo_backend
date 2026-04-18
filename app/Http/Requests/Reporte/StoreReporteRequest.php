@@ -34,7 +34,8 @@ class StoreReporteRequest extends FormRequest
             "geom" => "required|array",
             "geom.type" => "required|in:Point,LineString",
             "geom.coordinates" => "required|array",
-            "url_imagen" => "nullable|array|min:1"
+            "url_imagen" => "nullable|array|min:1",
+            "url_imagen.*" => "url"
         ];
 
         if ($this->tipo_reporte == TipoReporteEnum::CIERRE_PROGRAMADO->value) {
