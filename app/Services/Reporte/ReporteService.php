@@ -22,6 +22,10 @@ class ReporteService{
                 "fecha_fin"=> $fecha_fin,
                 "activo" => true
             ]));
+            if(array_key_exists('url_imagen', $data)){
+                $imagenes = array_map(fn($url) => ['url_imagen' => $url], $data['url_imagen']);
+                $reporte->fotos()->createMany($imagenes);
+            }
             DB::update("UPDATE reporte SET geom = ST_SetSRID(ST_GeomFromGeoJSON(?), 4326) WHERE id_reporte = ?", [$geoJson, $reporte->id_reporte]);
             //dd($reporte->all());
             return $reporte->fresh();

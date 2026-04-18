@@ -43,7 +43,7 @@ class Reporte extends Model
         return $this->belongsTo(Usuario::class, 'id_usuario', 'id_usuario');
     }
 
-    public function tipoReporte()
+    /* public function tipoReporte()
     {
         return $this->belongsTo(TipoReporte::class, 'id_tipo_reporte', 'id_tipo_reporte');
     }
@@ -51,10 +51,10 @@ class Reporte extends Model
     public function gravedadReporte()
     {
         return $this->belongsTo(GravedadReporte::class, 'id_gravedad_reporte', 'id_gravedad_reporte');
-    }
+    } */
 
     public function fotos()
     {
-        return $this->hasMany(Foto::class, 'id_reporte', 'id_reporte');
+        return $this->hasMany(UrlImagenReporte::class, 'id_reporte', 'id_reporte');
     }
 }
