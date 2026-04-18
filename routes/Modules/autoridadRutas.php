@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Modules;
 
 use App\Http\Controllers\Autoridad\AutoridadController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware("auth:sanctum")->prefix("/autoridad")->group(function () {

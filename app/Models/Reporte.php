@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Clickbar\Magellan\Database\Eloquent\HasPostgisColumns;
+use Clickbar\Magellan\Data\Geometries\Geometry;
 
 class Reporte extends Model
 {
     use HasFactory;
-    use HasPostgisColumns;
+    //use HasPostgisColumns;
     
     protected $table = 'reporte';
     protected $primaryKey = 'id_reporte';
@@ -20,14 +21,11 @@ class Reporte extends Model
     protected $fillable = [
         'id_reporte',
         'id_usuario',
-        'id_tipo_reporte',
-        'id_gravedad_reporte',
+        'tipo_reporte',
+        'gravedad_reporte',
         'titulo',
         'descripcion',
-        'geom' => [
-            'type' => 'geometry',
-            'srid' => 4326,
-        ],
+        'geom' => Geometry::class,
         'activo',
         'fecha_inicio',
         'fecha_fin',
@@ -45,7 +43,7 @@ class Reporte extends Model
         return $this->belongsTo(Usuario::class, 'id_usuario', 'id_usuario');
     }
 
-    public function tipoReporte()
+    /* public function tipoReporte()
     {
         return $this->belongsTo(TipoReporte::class, 'id_tipo_reporte', 'id_tipo_reporte');
     }
@@ -53,10 +51,10 @@ class Reporte extends Model
     public function gravedadReporte()
     {
         return $this->belongsTo(GravedadReporte::class, 'id_gravedad_reporte', 'id_gravedad_reporte');
-    }
+    } */
 
     public function fotos()
     {
-        return $this->hasMany(Foto::class, 'id_reporte', 'id_reporte');
+        return $this->hasMany(UrlImagenReporte::class, 'id_reporte', 'id_reporte');
     }
 }

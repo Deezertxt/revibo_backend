@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UrlImagenReporte extends Model
 {
     use HasFactory;
+    use HasUuids;
     
     protected $table = 'url_imagen_reporte';
     protected $primaryKey = 'id_url_imagen_reporte';
