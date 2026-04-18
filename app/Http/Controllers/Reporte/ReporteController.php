@@ -7,6 +7,7 @@ use App\Http\Requests\Reporte\StoreReporteRequest;
 use App\Services\Reporte\ReporteService;
 use App\Http\Resources\Reporte\ReporteResource;
 use App\Actions\Reporte\GetAllReportesAction;
+use App\Actions\Reporte\GetReporteByIdAction;
 
 class ReporteController extends Controller
 {
@@ -29,10 +30,11 @@ class ReporteController extends Controller
 
     public function store(StoreReporteRequest $request){
         $reporte = $this->service->crear($request->validated());
+        $reporte = app(GetReporteByIdAction::class)->execute($reporte->id_reporte);
         if($reporte){
             $data = [
                 "message"=> "Reporte creado correctamente",
-                "data" => ReporteResource::collection($reporte),
+                "data" => new ReporteResource($reporte),
             ];
             return response()->json($data, 200);
         }else{

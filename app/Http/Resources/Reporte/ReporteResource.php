@@ -25,10 +25,7 @@ class ReporteResource extends JsonResource
             'institucion' => $this->usuario->institucion->nombre ?? 'Administracion',
             'tipo_reporte' => $this->tipo_reporte,
             'gravedad_reporte' => $this->gravedad_reporte,
-            'geom' => $this->when(
-                $this->geometry,
-                fn () => json_decode($this->geometry)
-            ),
+            'geom' => $this->geom_json ? json_decode($this->geom_json) : null,
             'estado' => $this->activo,
             'fecha_inicio'=> $this->fecha_inicio->format('d-m-Y H:i'),
             'fecha_fin'=> $this->whenNotNull(
