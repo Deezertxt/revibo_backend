@@ -28,6 +28,23 @@ class ReporteController extends Controller
         }
     }
 
+    public function show(string $id_reporte, GetReporteByIdAction $action){
+        $reporte = $action->execute($id_reporte);
+
+        if($reporte){
+            $data = [
+                "message"=> "Reporte obtenido correctamente",
+                "data" => new ReporteResource($reporte),
+            ];
+            return response()->json($data, 200);
+        }else{
+            $data = [
+                "message" => "Reporte no encontrado",
+            ];
+            return response()->json($data, 404);
+        }
+    }
+
     public function store(StoreReporteRequest $request){
         $reporte = $this->service->crear($request->validated());
         $reporte = app(GetReporteByIdAction::class)->execute($reporte->id_reporte);
