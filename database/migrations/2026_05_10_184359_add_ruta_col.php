@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('ruta', function (Blueprint $table) {
-            $table->float('distancia')->nullable();
-            $table->float('tiempo')->nullable();
+            $table->integer('distancia')->nullable();
+            $table->integer('tiempo')->nullable();
             $table->string('origen_nombre')->nullable();
             $table->decimal('origen_lat', 10, 7)->nullable();
             $table->decimal('origen_lng', 10, 7)->nullable();
