@@ -23,17 +23,17 @@ class StoreRutaRequest extends FormRequest
     {
         return [
             "nombre"=> "required|string|max:255",
-            "distancia_km"=>"required|integer|min:1",
+            "distancia"=>"required|integer|min:1",
             "tiempo"=>"required|integer|min:1",
-            "nombre_origen"=>"required|string|max:255",
-            "nombre_destino"=>"required|string|max:255",
-            "ori_lat"=>"sometimes|nullable|numeric|between:-90,90",
-            "ori_lng"=>"sometimes|nullable|numeric|between:-180,180",
-            "dest_lat"=>"sometimes|nullable|numeric|between:-90,90",
-            "dest_lng"=>"sometimes|nullable|numeric|between:-180,180",
-            "geom" => "required|array",
-            "geom.type" => "required|in:LineString",
-            "geom.coordinates" => "required|array",
+            "origen_nombre"=>"required|string|max:255",
+            "destino_nombre"=>"required|string|max:255",
+            "origen_lat"=>"sometimes|nullable|numeric|between:-90,90",
+            "origen_lng"=>"sometimes|nullable|numeric|between:-180,180",
+            "destino_lat"=>"sometimes|nullable|numeric|between:-90,90",
+            "destino_lng"=>"sometimes|nullable|numeric|between:-180,180",
+            "ruta" => "required|array",
+            "ruta.type" => "required|in:LineString",
+            "ruta.coordinates" => "required|array",
         ];
     }
 }
