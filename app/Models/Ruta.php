@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Clickbar\Magellan\Database\Eloquent\HasPostgisColumns;
+use Clickbar\Magellan\Data\Geometries\Geometry;
 
 class Ruta extends Model
 {
     use HasFactory;
-    use HasPostgisColumns;
+    //use HasPostgisColumns;
     
     protected $table = 'ruta';
     protected $primaryKey = 'id_ruta';
@@ -21,10 +22,15 @@ class Ruta extends Model
         'id_ruta',
         'id_usuario',
         'nombre',
-        'ruta' => [
-            'type' => 'linestring',
-            'srid' => 4326,
-        ],
+        'ruta' => Geometry::class,
+        'distancia',
+        'tiempo',
+        'origen_nombre',
+        'destino_nombre',
+        'origen_lat',
+        'origen_lng',
+        'destino_lat',
+        'destino_lng',
         'activa',
         'created_at',
         'updated_at',
