@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class DeviceTokenController extends Controller
 {
-    protected function getIdUsuario(){
+    /* protected function getIdUsuario(){
         return request()->user()->id_usuario;
-    }
+    } */
     public function store(Request $request){
         $request->validate([
             'token' => 'required|string',
@@ -19,7 +19,7 @@ class DeviceTokenController extends Controller
         DeviceTokens::updateOrCreate([
             'token' => $request->token
         ],[
-            'id_usuario' => $this->getIdUsuario() ?? null,
+            //'id_usuario' => $this->getIdUsuario() ?? null,
             'platform' => strtolower($request->platform),
             'active' => true
         ]);
