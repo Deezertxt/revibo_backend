@@ -19,7 +19,7 @@ class DeviceTokenController extends Controller
         DeviceTokens::updateOrCreate([
             'token' => $request->token
         ],[
-            'id_usuario' => $this->getIdUsuario(),
+            'id_usuario' => $this->getIdUsuario() ?? null,
             'platform' => strtolower($request->platform),
             'active' => true
         ]);
