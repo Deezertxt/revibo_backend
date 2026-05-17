@@ -12,7 +12,7 @@ class DeviceTokenController extends Controller
     }
     public function store(Request $request){
         $request->validate([
-            'token' => 'requires|string',
+            'token' => 'required|string',
             'platform' => 'required|string'
         ]);
 
