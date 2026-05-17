@@ -69,5 +69,9 @@ class Usuario extends Authenticatable
         return $this->hasMany(Reporte::class, 'id_usuario', 'id_usuario');
     }
 
+    public function ubicaciones()
+    {
+        return $this->hasMany(UserLocations::class, 'id_usuario', 'id_usuario');
+    }
 
 }

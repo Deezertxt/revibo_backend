@@ -1,5 +1,6 @@
 <?php 
 
+use App\Http\Controllers\DeviceTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,8 @@ Route::prefix('v1')->group(function() {
             'user' => request()->user(),
         ]));
     });
+
+    Route::post('/device-token', [DeviceTokenController::class, 'store']);
 
 
     require __DIR__.'/Modules/archivoRuta.php';

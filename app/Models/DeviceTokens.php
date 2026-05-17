@@ -21,6 +21,8 @@ class DeviceTokens extends Model
         'token',
         'platform',
         'is_active',
+        'notification_enabled',
+        'last_seen_at',
         'created_at',
         'updated_at',
     ];
@@ -29,6 +31,7 @@ class DeviceTokens extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'is_active' => 'boolean',
+        'last_seen_at' => 'datetime'
     ];
 
     public function usuario()

@@ -7,6 +7,8 @@
     "require": {
         "php": "^8.2",
         "clickbar/laravel-magellan": "^2.1",
+        "google/apiclient": "^2.19",
+        "google/auth": "^1.50",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.3",
         "laravel/tinker": "^2.9"
