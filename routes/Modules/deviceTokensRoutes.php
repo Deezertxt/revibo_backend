@@ -8,5 +8,5 @@ use App\Http\Controllers\DeviceTokenController;
 
 Route::prefix('/device-token')->group(function () {
     Route::post('/', [DeviceTokenController::class, 'store']);
-    Route::post('/sync', [DeviceTokenController::class, 'sync']);
+    Route::post('/sync', [DeviceTokenController::class, 'sync'])->middleware('tryAuth');
 });

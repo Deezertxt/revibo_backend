@@ -27,7 +27,7 @@ class DeviceTokensService{
     public function actualizar(array $data) {
         $lng = $data['lng'];
         $lat = $data['lat'];
-        $id_usuario = auth()->user()->id_usuario ?? null;
+        $id_usuario = request()->user()->id_usuario ?? null; 
         $dt = DB::transaction(function () use($data, $lng, $lat, $id_usuario){
             $dvtn = DeviceTokens::updateOrCreate([
                 'token' => $data['token']
