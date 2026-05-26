@@ -23,6 +23,7 @@ class DeviceTokens extends Model
         'is_active',
         'notification_enabled',
         'last_seen_at',
+        'geom',
         'created_at',
         'updated_at',
     ];

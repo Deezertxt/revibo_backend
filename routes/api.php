@@ -1,6 +1,6 @@
 <?php 
 
-use App\Http\Controllers\DeviceTokenController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,13 +25,11 @@ Route::prefix('v1')->group(function() {
         ]));
     });
 
-    Route::post('/device-token', [DeviceTokenController::class, 'store']);
-
-
     require __DIR__.'/Modules/archivoRuta.php';
     require __DIR__.'/auth.php';
     require __DIR__.'/Modules/autoridadRutas.php';
     require __DIR__.'/Modules/InstitucionRutas.php';
     require __DIR__.'/Modules/reporteRutas.php';
     require __DIR__.'/Modules/rutasRuta.php';
+    require __DIR__.'/Modules/deviceTokensRoutes.php';
 });

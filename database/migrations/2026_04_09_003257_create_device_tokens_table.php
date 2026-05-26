@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('device_tokens', function (Blueprint $table) {
             $table->uuid('id_device_token')->primary()->default(DB::raw('gen_random_uuid()'));
-            $table->uuid('id_usuario');
+            $table->uuid('id_usuario')->nullable();
             $table->text('token')->unique();
             $table->enum('platform', ['ios', 'android'])->nullable();
             $table->boolean('is_active')->default(true)->nullable();
