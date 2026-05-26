@@ -15,11 +15,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function ($middleware) {
         $middleware->alias([
             'rol' => \App\Http\Middleware\RoleMiddleware::class,
-        ]);
-        $middleware->alias([
             'tryAuth' => \App\Http\Middleware\TryAuthenticate::class,
         ]);
-        
         // Enable CORS for mobile and web clients
         $middleware->append(\Illuminate\Http\Middleware\HandleCors::class);
     })
