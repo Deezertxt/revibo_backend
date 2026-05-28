@@ -50,6 +50,7 @@ class ReporteService{
         
         DB::update("UPDATE reporte SET geom = ST_SetSRID(ST_GeomFromGeoJSON(?), 4326) WHERE id_reporte = ?", [$geoJson, $idReporteNuevo]);
         
+        event(new ReporteCreadoEvent($reporte));
         return $reporte->fresh();
     }
 
