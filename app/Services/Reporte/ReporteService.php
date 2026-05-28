@@ -2,6 +2,7 @@
 
 namespace App\Services\Reporte;
 
+use App\Events\ReporteCreadoEvent;
 use App\Models\Reporte;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
