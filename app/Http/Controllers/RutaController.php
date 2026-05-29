@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\RutaResource;
 use App\Http\Requests\StoreRutaRequest;
+use App\Http\Requests\UpdateRutaRequest;
 use App\Services\RutaService;
 use App\Actions\Ruta\GetAllRutasByUserAction;
 use App\Actions\Ruta\GetRutaByIdAction;
@@ -42,5 +43,37 @@ class RutaController extends Controller
         }else{
             return response()->json(["message" => "Error al crear ruta"], 400);
         }
+    }
+
+    public function update(UpdateRutaRequest $request, string $id_ruta){
+        $rutaActualizada = $this->service->actualizar(
+            data: $request->validated(),
+            id_ruta: $id_ruta,
+            id_usuario: $this->getIdUsuario(),
+        );
+
+        if(!$rutaActualizada){
+            return response()->json(["message" => "Ruta no encontrada"], 404);
+        }
+
+        $ruta = app(GetRutaByIdAction::class)->execute($id_ruta);
+
+        return response()->json([
+            "message" => "Ruta actualizada exitosamente",
+            "data" => new RutaResource($ruta)
+        ], 200);
+    }
+
+    public function destroy(string $id_ruta){
+        $eliminada = $this->service->eliminar(
+            id_ruta: $id_ruta,
+            id_usuario: $this->getIdUsuario(),
+        );
+
+        if(!$eliminada){
+            return response()->json(["message" => "Ruta no encontrada"], 404);
+        }
+
+        return response()->json(["message" => "Ruta eliminada exitosamente"], 200);
     }
 }
