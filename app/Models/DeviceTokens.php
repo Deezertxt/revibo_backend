@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DeviceTokens extends Model
 {
-    use hasFactory;
+    use HasFactory;
 
     protected $table = 'device_tokens';
     protected $primaryKey = 'id_device_token';

@@ -22,7 +22,7 @@ class Ruta extends Model
         'id_ruta',
         'id_usuario',
         'nombre',
-        'ruta' => Geometry::class,
+        'ruta',
         'distancia',
         'tiempo',
         'origen_nombre',
