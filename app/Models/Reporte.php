@@ -25,7 +25,7 @@ class Reporte extends Model
         'gravedad_reporte',
         'titulo',
         'descripcion',
-        'geom' => Geometry::class,
+        'geom',
         'activo',
         'fecha_inicio',
         'fecha_fin',

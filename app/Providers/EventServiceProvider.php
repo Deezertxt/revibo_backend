@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\NotifyAffectedRoutesListener;
 use App\Listeners\PruebaNotiReporteGralListener;
 use App\Listeners\SendNearByReportNotificationListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -16,6 +17,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         ReporteCreadoEvent::class => [
             SendNearByReportNotificationListener::class,
+            NotifyAffectedRoutesListener::class
         ],
     ];
 
