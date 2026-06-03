@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Enums\TipoReporteEnum;
 use App\Enums\GravedadReporteEnum;
 use Illuminate\Validation\Rules\Enum;
+use Illuminate\Validation\Rule;
 
 
 class StoreReporteRequest extends FormRequest
@@ -26,24 +27,19 @@ class StoreReporteRequest extends FormRequest
     
     public function rules(): array
     {
-        $rules = [
+        return [
             "titulo" => "required|string|max:100",
             "descripcion" => "required|string|max:500",
             "tipo_reporte"=> ["required", new Enum(TipoReporteEnum::class)],
+            "fecha_inicio" => [Rule::requiredIf(fn() => $this->input('tipo_reporte') === 'cierre_programado'), 'date_format:d-m-Y H:i'],
+            "fecha_fin" => [Rule::requiredIf(fn() => $this->input('tipo_reporte') === 'cierre_programado'), 'date_format:d-m-Y H:i'],
             "gravedad_reporte" => ["required", new Enum(GravedadReporteEnum::class)],
             "geom" => "required|array",
             "geom.type" => "required|in:Point,LineString",
             "geom.coordinates" => "required|array",
             "url_imagen" => "nullable|array|min:1",
-            "url_imagen.*" => "url"
+            "url_imagen.*" => "url",
         ];
-
-        if ($this->tipo_reporte == TipoReporteEnum::CIERRE_PROGRAMADO->value) {
-            $rules["fecha_inicio"] = "required|date|after_or_equal:today";
-            $rules["fecha_fin"] = "required|date|after_or_equal:fecha_inicio";
-        }
-
-        return $rules;
     }
 
     /* public function withValidator($validator){
