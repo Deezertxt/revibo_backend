@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reporte;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Reporte\StoreReporteRequest;
+use App\Http\Requests\Reporte\UpdateReporteRequest;
 use App\Services\Reporte\ReporteService;
 use App\Http\Resources\Reporte\ReporteResource;
 use App\Actions\Reporte\GetAllReportesAction;
@@ -21,10 +22,9 @@ class ReporteController extends Controller
             ];
             return response()->json($data, 200);
         }else{
-            $data = [
+            return response()->json([
                 "message" => "Error al obtener reportes",
-            ];
-            return response()->json($data, 404);
+            ], 404);
         }
     }
 
@@ -38,10 +38,9 @@ class ReporteController extends Controller
             ];
             return response()->json($data, 200);
         }else{
-            $data = [
+            return response()->json([
                 "message" => "Reporte no encontrado",
-            ];
-            return response()->json($data, 404);
+            ], 404);
         }
     }
 
@@ -55,10 +54,25 @@ class ReporteController extends Controller
             ];
             return response()->json($data, 200);
         }else{
-            $data = [
+            return response()->json([
                 "message" => "Error al crear reportes",
+            ], 404);
+        }
+    }
+
+    public function update(UpdateReporteRequest $request, string $id){
+        $reporte = $this->service->actualizar($request->validated(), $id);
+        $reporte = app(GetReporteByIdAction::class)->execute($reporte->id_reporte);
+        if($reporte){
+            $data = [
+                "message"=> "Reporte editado correctamente",
+                "data" => new ReporteResource($reporte),
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 200);
+        }else{
+            return response()->json([
+                "message" => "Error al editar reportes",
+            ], 404);
         }
     }
 }
