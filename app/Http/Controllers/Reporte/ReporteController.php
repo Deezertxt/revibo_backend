@@ -9,6 +9,8 @@ use App\Services\Reporte\ReporteService;
 use App\Http\Resources\Reporte\ReporteResource;
 use App\Actions\Reporte\GetAllReportesAction;
 use App\Actions\Reporte\GetReporteByIdAction;
+use App\Models\Reporte;
+use Illuminate\Support\Facades\DB;
 
 class ReporteController extends Controller
 {
@@ -74,5 +76,15 @@ class ReporteController extends Controller
                 "message" => "Error al editar reportes",
             ], 404);
         }
+    }
+
+    public function destroy(string $id_reporte){
+        $reporte = Reporte::findOrFail($id_reporte);
+        if(!$reporte){
+            return response()->json(["mesagge" => "reporte no encontrado"], 404);
+        }
+        DB::table('url_imagen_reporte')->where('id_reporte', $id_reporte)->delete();
+        $reporte->delete();
+        return response()->json(["message" => "reporte eliminado"], 200);
     }
 }
