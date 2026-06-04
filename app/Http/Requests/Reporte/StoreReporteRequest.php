@@ -27,11 +27,11 @@ class StoreReporteRequest extends FormRequest
     
     public function rules(): array
     {
-        return [
+        $rules = [
             "titulo" => "required|string|max:100",
             "descripcion" => "required|string|max:500",
             "tipo_reporte"=> ["required", new Enum(TipoReporteEnum::class)],
-            "fecha_inicio" => [
+            /* "fecha_inicio" => [
                 Rule::requiredIf(fn() => $this->input('tipo_reporte') === 'cierre_programado'),
                 'sometimes',
                 'date'
@@ -40,7 +40,7 @@ class StoreReporteRequest extends FormRequest
                 Rule::requiredIf(fn() => $this->input('tipo_reporte') === 'cierre_programado'),
                 'sometimes',
                 'date'
-            ],
+            ], */
             "gravedad_reporte" => ["required", new Enum(GravedadReporteEnum::class)],
             "geom" => "required|array",
             "geom.type" => "required|in:Point,LineString",
@@ -48,6 +48,14 @@ class StoreReporteRequest extends FormRequest
             "url_imagen" => "nullable|array|min:1",
             "url_imagen.*" => "url",
         ];
+
+        if($this->input('tipo_reporte') === 'cierre_programado'){
+            $rules['fecha_inicio'] = ['required', 'date'];
+            $rules['fecha_fin'] = ['required', 'date'];
+        }
+
+        return $rules;
+
     }
 
     /* public function withValidator($validator){
