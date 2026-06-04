@@ -27,8 +27,8 @@ class StoreAutoridadRequest extends FormRequest
             "nombre"=> "required|string|max:100",
             "correo"=> "required|email|unique:usuario,correo",
             "cargo"=>"required|string|max:225",
-            "contrasena"=> "required|string|max:12",
-            "confirmacion_contrasena"=> "required|string|max:12|same:contrasena",
+            "contrasena"=> "required|string|max:20",
+            "confirmacion_contrasena"=> "required|string|max:20|same:contrasena",
             "id_institucion"=> "required|exists:institucion,id_institucion",
         ];
     }
