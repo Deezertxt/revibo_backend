@@ -34,14 +34,12 @@ class StoreReporteRequest extends FormRequest
             "fecha_inicio" => [
                 Rule::requiredIf(fn() => $this->input('tipo_reporte') === 'cierre_programado'),
                 'sometimes',
-                'date',
-                'after_or_equal:today',
+                'date'
             ],
             "fecha_fin" => [
                 Rule::requiredIf(fn() => $this->input('tipo_reporte') === 'cierre_programado'),
                 'sometimes',
-                'date',
-                'after_or_equal:fecha_inicio',
+                'date'
             ],
             "gravedad_reporte" => ["required", new Enum(GravedadReporteEnum::class)],
             "geom" => "required|array",
