@@ -34,7 +34,7 @@ class SendPushNotificationJob implements ShouldQueue
             $messages[] = [
                 'to' => $token,
                 'sound' => 'default',
-                'title' => 'incidente en tus rutas',
+                'title' => 'Incidente en tus rutas',
                 'body' => $this->title,
             ];
         }
