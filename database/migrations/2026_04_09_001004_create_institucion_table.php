@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('institucion', function (Blueprint $table) {
             $table->uuid('id_institucion')->primary()->default(DB::raw('gen_random_uuid()'));
-            $table->string('nombre',50)->nullable();
-            $table->string('descripcion',550)->nullable();
+            $table->text('nombre')->nullable();
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }

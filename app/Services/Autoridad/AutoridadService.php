@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class AutoridadService{
     public function crear(array $data){
         return Usuario::create(array_merge($data,[
-            "id_autoridad"=> Str::uuid(),
+            "id_usuario"=> Str::uuid(),
             "password"=> Hash::make($data["contrasena"]),
             'estado' => true,
             'rol'=> RolUsuario::AUTORIDAD,
@@ -19,11 +19,7 @@ class AutoridadService{
         ]));  
     }
 
-    public function actualizar(){
-
-    }
-
-    public function eliminar(){
-
+    public function eliminar($id){
+        return Usuario::where("id_usuario", $id)->delete();
     }
 }

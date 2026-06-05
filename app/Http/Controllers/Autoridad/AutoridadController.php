@@ -16,7 +16,7 @@ class AutoridadController extends Controller
         if ($autoridades){
             $data = [
                 "message" => "Autoridades obtenidas exitosamente",
-                "data" => new AutoridadResource($autoridades),
+                "data" => AutoridadResource::collection($autoridades),
             ];
             return response()->json($data, 200);
         }else{
@@ -43,4 +43,19 @@ class AutoridadController extends Controller
         }
         
     }
+
+        public function destroy($id){
+            $deleted = $this->service->eliminar($id);
+            if ($deleted) {
+                $data = [
+                    "message"=> "Autoridad eliminada exitosamente",
+                ];
+                return response()->json($data,200);
+            } else {
+                $data = [
+                    "message"=> "Error al eliminar autoridad",
+                ];
+                return response()->json($data,404);
+            }
+        }
 }
