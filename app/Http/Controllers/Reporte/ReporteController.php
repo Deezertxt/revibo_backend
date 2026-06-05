@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Reporte;
 
+use App\Events\ReporteResueltoEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Reporte\StoreReporteRequest;
 use App\Http\Requests\Reporte\UpdateReporteRequest;
@@ -80,6 +81,17 @@ class ReporteController extends Controller
 
     public function destroy(string $id_reporte){
         $reporte = Reporte::findOrFail($id_reporte);
+        $wkt = DB::table('reporte')
+                ->where('id_reporte', $id_reporte)
+                ->selectRaw('ST_AsText(geom) as geom')
+                ->first()
+                ->geom;
+        event(new ReporteResueltoEvent(
+            geomWkt: $wkt,
+            gravedadReporte: $reporte->gravedad_reporte,
+            tituloReporte: $reporte->titulo
+        ));
+        
         if(!$reporte){
             return response()->json(["mesagge" => "reporte no encontrado"], 404);
         }
