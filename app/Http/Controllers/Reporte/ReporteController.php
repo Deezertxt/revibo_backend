@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Reporte;
 
+use App\Actions\Reporte\GetAllReportesByUserAction;
 use App\Events\ReporteResueltoEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Reporte\StoreReporteRequest;
@@ -16,6 +17,10 @@ use Illuminate\Support\Facades\DB;
 class ReporteController extends Controller
 {
     public function __construct(protected ReporteService $service){}
+
+    protected function getIdUsuario(){
+        return request()->user()->id_usuario;
+    }
     public function index(GetAllReportesAction $action){
         $reporte = $action->execute();
         if($reporte){
@@ -27,6 +32,22 @@ class ReporteController extends Controller
         }else{
             return response()->json([
                 "message" => "Error al obtener reportes",
+            ], 404);
+        }
+    }
+
+    public function indexByUser(GetAllReportesByUserAction $action){
+        $reportes = $action->execute($this->getIdUsuario());
+
+        if($reportes){
+            $data = [
+                'message' => 'Reportes de usuario obtenidos correctamente',
+                'data' => ReporteResource::collection($reportes)
+            ];
+            return response()->json($data, 200);
+        }else{
+            return response()->json([
+                "message" => "Error al obtener reportes del usuario",
             ], 404);
         }
     }
